@@ -26,3 +26,30 @@ function hello() {
     // strict mode
 }
 ```
+
+## uses of "use strict"
+
+1. prevents accidental globals
+```
+var theVal = 0;
+thVal = 1; // this not "theVal", it is "thVal". If we use strict mode, this will throw an error.
+if(theVal > 0){
+    console.log("greater than 0");
+}
+```
+2. Does not spill values present in eval statement
+```
+"use strict"
+var a = 2;
+eval("var a = 1");
+console.log(a); // If not strict, a will become 1
+```
+3. Cannot delete variables and functions when strict
+```
+"use strict";
+var a = 2;
+delete a; // throws an error
+
+var foo = function(){}
+delete foo; // throws an error
+```
