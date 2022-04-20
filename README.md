@@ -72,3 +72,58 @@ console.log(x); // 1
 console.log(obj1); // { "a": 1, "b": 2}
 console.log(obj2); // { "a": 1} // This is not changed
 ```
+
+# Rest operator
+One option to get indefinite number of arguments is using "arguments" keyword inside loop. It is not any array(array methods will not work), but we can itterate over the arguments.
+
+Other option is to use spread operator
+- It should be the last argument
+- All the remaining arguments will form an array. We can use array operations on this.
+```
+var foo = function(method, ...options){
+    console.log(arguments); // ["a", 1, 2, 3, 4] // Cannot perform array operations on this
+    console.log(method); // "a"
+    console.log(options); // [1, 2, 3, 4] // Can perform array operations on this
+}
+foo("a", 1, 2, 3, 4);
+```
+
+# Spread Operator
+```
+var arr1 = [1, 2, 3]
+var arr2 = [...arr1]; // We can use this copy an array.
+var arr3 = arr1; // This is just passing array as refference not as value.
+arr2[0] = 4;
+arr3[0] = 4;
+console.log(arr1); // [1, 2, 3]
+console.log(arr2); // [4, 2, 3]
+console.log(arr3); // [4, 2, 3]
+console.log(arr1); // [4, 2, 3]
+
+var fun = function (...options) {
+    console.log(options);
+}
+fun(arr1); // The options inside the function will be [[1,2,3]]
+fun(...arr1); // The options inside the function will be [1,2,3]
+```
+
+# Template String
+- Should be inside ``
+- javascript code should be inside ${}
+- tag\`\`. what ever is inside this \`\` will be passed to the function named tag
+```
+function h1(strings, ...values) { 
+    // strings will contain [ "hell ", ", welcome to ", ""]
+    // values will contain [ name, place ] coming from ${}
+    var body = "";
+    for (var i = 0; i < strings.legth; i++) {
+        body += strings[i] + (values[i] || "");
+    }
+    return `<h1>{body}</h1>`;
+
+}
+
+var name = "MJ";
+var place = "world";
+console.log(h1`hello ${name}, welcome to ${place}`)
+```
