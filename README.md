@@ -53,3 +53,22 @@ delete a; // throws an error
 var foo = function(){}
 delete foo; // throws an error
 ```
+
+# Pass by value or pass by reference
+
+1. Primitive data types are passed as values.
+2. Objects are passed as pass by reference. i.e if we update a value, it will get reflected. But we replace it will not change the object.
+```
+var x = 1;
+var obj1 = { "a": 1}
+var obj2 = { "a": 1}
+var foo = function(obj1, obj2, x){
+    x = 2;
+    obj1.["b"] = 2;
+    obj2 = { "new" : 10 };
+}
+foo(obj1,obj2,x);
+console.log(x); // 1
+console.log(obj1); // { "a": 1, "b": 2}
+console.log(obj2); // { "a": 1} // This is not changed
+```
